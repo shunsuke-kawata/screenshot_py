@@ -15,16 +15,16 @@ def take(dir_name:str):
         pass
     
 def main():
-    
     #日付でフォルダを作成
     dt_now = datetime.datetime.now()
     tmp_dir_name = dt_now.strftime('%Y年%m月%d日%H:%M:%S')
     os.mkdir(f"out/{tmp_dir_name}")
     
     start_time = time.perf_counter()
-    schedule.every(2).seconds.do(take,dir_name=tmp_dir_name)
     
     #3分ごとに定期実行
+    schedule.every(3).minutes.do(take,dir_name=tmp_dir_name)
+    
     while True:
         schedule.run_pending()
         
@@ -34,7 +34,6 @@ def main():
             print(f"現在時刻：{current_time}")
             print("end")
             break
-            
             
 if __name__=='__main__':
     main() 
